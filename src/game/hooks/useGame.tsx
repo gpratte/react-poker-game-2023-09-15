@@ -6,7 +6,7 @@ import {NotificationData} from "../../league/model/NotificationData";
 import {NotificationContextType} from "../../league/components/League";
 
 function useGame() {
-  const [game, setGame] = useState<GameData | null>(null);
+  const [game, setGame] = useState<GameData>({} as GameData);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const {newNotification} = useContext(NotificationContext) as NotificationContextType;
   const [showAddPlayer, setShowAddPlayer] = useState(false);

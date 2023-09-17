@@ -1,18 +1,44 @@
 import {GamePlayerData} from "./GamePlayerData";
 
-export class GameData {
-    id: number;
-    seasonId: number;
-    numPaidPlayers: number;
-    players: Array<GamePlayerData>;
+export interface GamePayout {
+  id: number;
+  gameId: number;
+  place: number;
+  amount: number;
+  chopAmount: number;
+}
 
-    constructor(id: number,
-                seasonId: number,
-                numPaidPlayers: number,
-                players: Array<GamePlayerData>) {
-        this.id = id;
-        this.seasonId = seasonId;
-        this.numPaidPlayers = numPaidPlayers;
-        this.players = players;
-    }
+export class GameData {
+  id: number;
+  seasonId: number;
+  date: string;
+  hostName?: string;
+  numPaidPlayers: number;
+  players: Array<GamePlayerData>;
+  totalCollected: number;
+  totalCombinedTocCalculated: number;
+  kittyCalculated: number;
+  prizePotCalculated: number;
+  payouts?: Array<GamePayout>;
+
+
+  constructor(id: number,
+              seasonId: number,
+              date: string,
+              numPaidPlayers: number,
+              players: Array<GamePlayerData>,
+              totalCollected: number,
+              totalCombinedTocCalculated: number,
+              kittyCalculated: number,
+              prizePotCalculated: number) {
+    this.id = id;
+    this.seasonId = seasonId;
+    this.date = date;
+    this.numPaidPlayers = numPaidPlayers;
+    this.players = players;
+    this.totalCollected = totalCollected;
+    this.totalCombinedTocCalculated = totalCombinedTocCalculated;
+    this.kittyCalculated = kittyCalculated;
+    this.prizePotCalculated = prizePotCalculated;
+  }
 }

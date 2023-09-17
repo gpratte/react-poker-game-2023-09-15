@@ -1,8 +1,14 @@
 import {Button, ListGroup, Offcanvas} from "react-bootstrap";
 import React from "react";
+import {NotificationData} from "../model/NotificationData";
 
-function Notifications(props) {
-  let notifications;
+function Notifications(props: {show: boolean,
+  hide: () => void,
+  deleteNotification: (id: number) => void,
+  deleteAllNotifications: () => void,
+  notifications: Array<NotificationData>}) {
+
+  let notifications: Array<NotificationData>;
   if (props.notifications && props.notifications.length > 0) {
     // Show the newest (the last in the list) first
     notifications = [...props.notifications].reverse();

@@ -1,5 +1,3 @@
-import {name} from "moment-timezone";
-
 export class SeasonPlayerData {
     id: number;
     playerId: number;

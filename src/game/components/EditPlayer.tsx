@@ -1,4 +1,5 @@
 import {Accordion, Button, Form} from "react-bootstrap";
+import _ from "lodash";
 import '../../common/style/common.css'
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -6,7 +7,8 @@ import {useRef} from "react";
 import Container from "react-bootstrap/Container";
 import useEditPlayer from "../hooks/useEditPlayer";
 import ErrorBoundary from "../../common/components/ErrorBoundry";
-function EditPlayerNoBoundry(props) {
+import {GamePlayerData} from "../model/GamePlayerData";
+function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Array<GamePlayerData>}) {
 
   const accordionRef = useRef(null);
   const {accordionOpen, setAccordionOpen,
@@ -22,7 +24,7 @@ function EditPlayerNoBoundry(props) {
     updateGamePlayer,
     resetToOriginalState} = useEditPlayer(props.gamePlayer);
 
-  const renderPlaces = (gamePlayer, gamePlayers) => {
+  const renderPlaces = (gamePlayer: GamePlayerData, gamePlayers: Array<GamePlayerData>) => {
     // Build an array of the places taken
     const taken = [];
     for (const gp of gamePlayers) {
@@ -44,7 +46,7 @@ function EditPlayerNoBoundry(props) {
 
     return placesLeft.map((place) => {
       return (
-        <option key={place} label={place} value={place}>{place}</option>
+        <option key={place} label={_.toString(place)} value={place}>{place}</option>
       )
     })
   }
@@ -138,6 +140,7 @@ function EditPlayerNoBoundry(props) {
                     // eslint-disable-next-line no-restricted-globals
                     const doit = confirm('are you sure?');
                     if (doit) {
+                      // @ts-ignore
                       accordionRef.current.click();
                       deleteGamePlayer(props.gamePlayer.id);
                     }
@@ -147,6 +150,7 @@ function EditPlayerNoBoundry(props) {
                 </Col>
                 <Col>
                   <Button variant="secondary" onClick={() => {
+                    // @ts-ignore
                     accordionRef.current.click();
                   }}>
                     Cancel
@@ -163,6 +167,7 @@ function EditPlayerNoBoundry(props) {
                       place: place,
                       chop: chop});
                     // must come after getting the state because the click will reset the state
+                    // @ts-ignore
                     accordionRef.current.click();
                   }}>
                     Update
@@ -177,7 +182,7 @@ function EditPlayerNoBoundry(props) {
   )
 }
 
-function EditPlayer(props) {
+function EditPlayer(props: {gamePlayer: GamePlayerData, gamePlayers: Array<GamePlayerData>}) {
   return (
     <ErrorBoundary customUI={<div>Something is amiss <i className="fa-solid fa-triangle-exclamation"></i></div>}>
       <EditPlayerNoBoundry {...props} ></EditPlayerNoBoundry>

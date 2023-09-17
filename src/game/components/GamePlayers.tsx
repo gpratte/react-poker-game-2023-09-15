@@ -1,12 +1,13 @@
 import {Button, Table} from "react-bootstrap";
 import AddPlayer from "./AddPlayer";
 import {useContext} from "react";
-import {GameContext} from "./Game";
+import {GameContext, GameContextType} from "./Game";
 import EditPlayer from "./EditPlayer";
+import {GamePlayerData} from "../model/GamePlayerData";
 
 function GamePlayers() {
 
-  const {game, showAddPlayer, setShowAddPlayer} = useContext(GameContext);
+  const {game, showAddPlayer, setShowAddPlayer} = useContext(GameContext) as GameContextType;
 
   const gamePlayers = game.players;
   //const isChop = this.isThereChop(gamePlayers);
@@ -14,12 +15,12 @@ function GamePlayers() {
   const numPaidPlayers = game.numPaidPlayers;
 
   // TODO should the processing of the players be moved to a context or a util file?
-  const renderGamePlayers = (gamePlayers, isChop) => {
+  const renderGamePlayers = (gamePlayers: Array<GamePlayerData>, isChop: boolean) => {
     if (!gamePlayers) {
       return;
     }
 
-    return gamePlayers.map((gamePlayer, index) => {
+    return gamePlayers.map((gamePlayer: GamePlayerData, index: number) => {
       const {
         id, boughtIn, rebought, annualTocParticipant,
         quarterlyTocParticipant, chop, tocPoints, tocChopPoints,
@@ -63,6 +64,9 @@ function GamePlayers() {
     })
   }
 
+  // @ts-ignore
+  // @ts-ignore
+  // @ts-ignore
   return (
     <div>
       <p>Paid Players: {numPaidPlayers}</p>
@@ -87,6 +91,7 @@ function GamePlayers() {
         </tbody>
       </Table>
 
+      // @ts-ignore
       <AddPlayer showAddPlayer={showAddPlayer} setShowAddPlayer={setShowAddPlayer} />
 
       <div>

@@ -2,7 +2,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import {Badge, Nav, NavDropdown} from "react-bootstrap";
 import React from "react";
-import {Link} from "react-router-dom";
 
 function Navigation(props) {
   return (

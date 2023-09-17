@@ -1,13 +1,14 @@
 import moment from 'moment-timezone'
 import {Table} from "react-bootstrap";
+import {GameData, GamePayout} from "../model/GameData";
 
 
-function Details(props) {
-  const renderPayouts = (payouts) => {
+function Details(props: {game: GameData}) {
+  const renderPayouts = (payouts: Array<GamePayout>) => {
     if (!payouts) {
       return;
     }
-    return payouts.map((payout, index) => {
+    return payouts.map((payout: GamePayout, index: number) => {
       const {id, place, amount, chopAmount} = payout
       return (
         <tr key={id}>
