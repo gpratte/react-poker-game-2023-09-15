@@ -1,8 +1,11 @@
 import {Button, Toast} from "react-bootstrap";
 import {isEmpty} from "lodash";
 import React from "react";
+import {NotificationData} from "../model/NotificationData";
 
-function ErrorNotification(props) {
+function ErrorNotification(props: {notification: NotificationData,
+  deleteNotification: (id: number) => void,
+  closeNotification: (id: number) => void}) {
   return (
     <Toast show={!isEmpty(props.notification)}
            autohide={true}

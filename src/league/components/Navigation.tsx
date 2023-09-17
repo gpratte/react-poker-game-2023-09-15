@@ -2,8 +2,9 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import {Badge, Nav, NavDropdown} from "react-bootstrap";
 import React from "react";
+import {NotificationData} from "../model/NotificationData";
 
-function Navigation(props) {
+function Navigation(props: {notifications: Array<NotificationData>, showNotifications: () => void}) {
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
