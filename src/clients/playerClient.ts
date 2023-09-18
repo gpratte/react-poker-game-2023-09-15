@@ -10,7 +10,15 @@ const playerClient = {
     if (getRandomInt(0, 4) === 1) {
       throw new Error('uh oh could not get players' + Date.now());
     }
-    return leaguePlayersData;
+
+    const players: Array<PlayerData> = [];
+    leaguePlayersData.forEach(player => {
+      const pd: PlayerData | undefined = PlayerData.fromObj(player);
+      if (pd) {
+        players.push(pd);
+      }
+    });
+    return players;
   }
 }
 
