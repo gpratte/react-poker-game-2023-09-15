@@ -1,4 +1,4 @@
-import _, {toNumber} from "lodash";
+import _ from "lodash";
 
 type Role = {
   id: number;

@@ -12,7 +12,7 @@ const gameClient = {
     if (getRandomInt(0, 10) === 1) {
       throw new Error('uh oh could not get game' + Date.now());
     }
-    return gameData;
+    return GameData.fromObj(gameData);
   },
 
   addPlayer: async (gameId: number, player: PlayerData): Promise<PlayerData> => {
