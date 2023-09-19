@@ -7,7 +7,6 @@ import playerClient from "../../clients/playerClient";
 import {PlayerData} from "../../player/model/PlayerData";
 import {SeasonPlayerData} from "../../season/model/SeasonPlayerData";
 import {NotificationData} from "../../league/model/NotificationData";
-import {GamePlayerData} from "../model/GamePlayerData";
 
 function useAddPlayer() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -34,7 +33,9 @@ function useAddPlayer() {
       }
       try {
         const season = await seasonClient.getSeason(game.seasonId);
-        setSeasonPlayers(season.players);
+        if (season.players) {
+          setSeasonPlayers(season.players);
+        }
       } catch (error) {
         newNotification(NotificationData.fromObject(error));
       }
@@ -55,8 +56,10 @@ function useAddPlayer() {
       setShowAddPlayer(false);
       try {
         const id = Number.parseInt(e.target.elements.playerId.value);
-        const gamePlayerData = new GamePlayerData(id);
-        await gameClient.addPlayer(game.id, gamePlayerData);
+        const playerData: PlayerData | undefined = PlayerData.fromObj({id});
+        if (playerData !== undefined) {
+          await gameClient.addPlayer(game.id, playerData);
+        }
         // await gameClient.addPlayer(game.id, {
         //   id: e.target.elements.playerId.value,
         //   buyin: e.target.elements.buyInId.checked,
@@ -74,8 +77,10 @@ function useAddPlayer() {
       setShowAddPlayer(false);
       try {
         const id = Number.parseInt(e.target.elements.id.value)
-        const playerData: PlayerData = new PlayerData(id);
-        await gameClient.addPlayer(game.id, playerData);
+        const playerData: PlayerData | undefined = PlayerData.fromObj({id});
+        if (playerData) {
+          await gameClient.addPlayer(game.id, playerData);
+        }
         // await gameClient.addPlayer(e.target.elements.firstNameId.value,
         //     e.target.elements.lastNameId.value,
         //     e.target.elements.emailId.value,

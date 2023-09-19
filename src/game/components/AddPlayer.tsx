@@ -76,32 +76,18 @@ function AddPlayer() {
 
     // Separator
     if (seasonPlayersFiltered && seasonPlayersFiltered.length > 0) {
-      const separator = new SeasonPlayerData(0,
-      0,
-          '--',
-          '---',
-          '----------------------');
+      const separator =
+        SeasonPlayerData.fromObj({id: 0, playerId: 0, seasonId: 0, name: '----------------------'});
       seasonPlayersFiltered.push(separator);
     }
 
     const seasonPlayerMapped = seasonPlayersFiltered.map((player) => {
       const {
-        id, playerId, firstName, lastName, name
+        id, playerId, name
       } = player;
-
-      let text;
-      if (!name) {
-        text = firstName ? firstName : '';
-        text += (firstName && lastName) ? ' ' : '';
-        text += lastName ? lastName : '';
-      } else {
-        text = name;
-      }
-
       let ident = playerId ? playerId : id;
-
       return (
-        <option key={ident} value={ident}>{text}</option>
+        <option key={ident} value={ident}>{name}</option>
       )
     })
 

@@ -91,8 +91,7 @@ function GamePlayers() {
         </tbody>
       </Table>
 
-      // @ts-ignore
-      <AddPlayer showAddPlayer={showAddPlayer} setShowAddPlayer={setShowAddPlayer} />
+      <AddPlayer/>
 
       <div>
         <Button variant="primary" onClick={() => setShowAddPlayer(true)}>

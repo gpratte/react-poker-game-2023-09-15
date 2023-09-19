@@ -113,7 +113,7 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
               <Form.Label>&nbsp;&nbsp;Place</Form.Label>
               <Col>
                 <Form.Control style={{textAlign: "center"}}
-                              onChange={(e) => setPlace(e.target.value)}
+                              onChange={(e) => setPlace(Number.parseInt(e.target.value))}
                               as="select"
                               defaultValue={props.gamePlayer.place ? props.gamePlayer.place : 11}
                               id="placeId">
@@ -126,7 +126,7 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
               <Form.Label>&nbsp;&nbsp;Chop</Form.Label>
               <Col>
                 <Form.Control style={{textAlign: "center"}}
-                              onChange={(e) => setChop(e.target.value)}
+                              onChange={(e) => setChop(Number.parseInt(e.target.value))}
                               as="input"
                               defaultValue={chop}
                               placeholder={"Chop amount"}
@@ -158,14 +158,14 @@ function EditPlayerNoBoundry(props: {gamePlayer: GamePlayerData, gamePlayers: Ar
                 </Col>
                 <Col>
                   <Button variant="primary" onClick={() => {
-                    updateGamePlayer({
+                    updateGamePlayer(GamePlayerData.fromObj({
                       buyin: buyInChecked,
                       rebuy: rebuyChecked,
                       annual: annualTocChecked,
                       quarterly: qTocChecked,
                       alert: alertChecked,
                       place: place,
-                      chop: chop});
+                      chop: chop}));
                     // must come after getting the state because the click will reset the state
                     // @ts-ignore
                     accordionRef.current.click();
