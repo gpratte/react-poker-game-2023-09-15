@@ -10,7 +10,7 @@ const seasonClient = {
     if (getRandomInt(0, 4) === 1) {
       throw new Error('uh oh could not get season' + Date.now());
     }
-    return seasonData;
+    return SeasonData.fromObj(seasonData);
   }
 }
 
